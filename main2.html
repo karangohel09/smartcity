@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartCityConnect – Ahmedabad | Manchester of India</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <style>
+    :root {
+      --primary-color: #ff6b35;
+      --secondary-color: #f7931e;
+      --accent-color: #004e89;
+      --text-dark: #2c3e50;
+      --gradient-1: linear-gradient(135deg, #ff6b35, #f7931e);
+      --gradient-2: linear-gradient(135deg, #004e89, #1a73e8);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-section {
+      background: var(--gradient-1);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="white" opacity="0.1"><polygon points="0,100 1000,0 1000,100"/></svg>');
+      background-size: cover;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+      border: none;
+      border-radius: 15px;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .icon-gradient {
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .weather-widget {
+      background: var(--gradient-2);
+      border-radius: 20px;
+      color: white;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      background: var(--primary-color);
+      border-radius: 50%;
+    }
+
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      height: 200px;
+      border-radius: 15px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0,0,0,0.7));
+      color: white;
+      padding: 20px;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: transform 0.3s ease;
+    }
+
+    .floating-btn:hover {
+      transform: scale(1.1);
+      color: white;
+    }
+
+    .section-divider {
+      height: 100px;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23f8f9fa"><polygon points="0,0 1000,100 1000,100 0,100"/></svg>');
+      background-size: cover;
+    }
+
+    .modal-header.bg-gradient {
+      background: var(--gradient-1) !important;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .detail-item {
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .detail-item i {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .image-slider {
+      height: 200px;
+      background: #e9ecef;
+      border-radius: 10px;
+      margin: 15px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .rating-stars {
+      color: #ffc107;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .floating-icon {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .interactive-map {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 sticky-top">
+    <a class="navbar-brand" href="#home">SmartCityConnect</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#attractions">Attractions</a></li>
+        <li class="nav-item"><a class="nav-link" href="#culture">Culture</a></li>
+        <li class="nav-item"><a class="nav-link" href="#business">Business</a></li>
+        <li class="nav-item"><a class="nav-link" href="#transport">Transport</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section text-white">
+    <div class="container hero-content">
+      <div class="row align-items-center">
+        <div class="col-lg-8" data-aos="fade-right">
+          <h1 class="display-3 fw-bold mb-4">
+            <i class="fas fa-city floating-icon me-3"></i>
+            Welcome to Ahmedabad
+          </h1>
+          <p class="lead fs-4 mb-4">Manchester of India | UNESCO World Heritage City | Commercial Capital of Gujarat</p>
+          <p class="fs-5 mb-5">Discover the perfect blend of ancient heritage and modern innovation in India's first UNESCO World Heritage City.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <a href="#about" class="btn btn-light btn-lg px-4">
+              <i class="fas fa-compass me-2"></i>Explore City
+            </a>
+            <a href="#attractions" class="btn btn-outline-light btn-lg px-4">
+              <i class="fas fa-camera me-2"></i>Top Attractions
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4" data-aos="fade-left">
+          <div id="weatherWidget" class="weather-widget text-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading weather...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Stats -->
+  <section class="stats-section py-5" data-aos="fade-up">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h2 class="display-6 fw-bold">Ahmedabad at a Glance</h2>
+      </div>
+      <div class="row g-4 text-center">
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-item">
+            <h3 class="display-4 fw-bold mb-2">8.7M+</h3>
+            <p class="fs-5">Population</p>
+            <small>7th largest city in India</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-item">
+            <h3 class="display-4 fw-bold mb-2">600+</h3>
+            <p class="fs-5">Years Old</p>
+            <small>Founded in 1411 AD</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-item">
+            <h3 class="display-4 fw-bold mb-2">89.6%</h3>
+            <p class="fs-5">Literacy Rate</p>
+            <small>Above national average</small>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="stat-item">
+            <h3 class="display-4 fw-bold mb-2">#1</h3>
+            <p class="fs-5">UNESCO Site</p>
+            <small>First Indian city</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h2 class="display-5 fw-bold mb-4">About Ahmedabad</h2>
+          <p class="lead">Ahmedabad, the largest city in Gujarat, stands as a testament to India's rich heritage and rapid modernization. Known as the "Manchester of India" for its textile industry, the city seamlessly blends 600 years of history with cutting-edge innovation.</p>
+          
+          <div class="timeline mt-4">
+            <div class="timeline-item">
+              <h5>1411 AD - Foundation</h5>
+              <p>Founded by Sultan Ahmed Shah on the banks of River Sabarmati</p>
+            </div>
+            <div class="timeline-item">
+              <h5>1915-1930 - Gandhi Era</h5>
+              <p>Sabarmati Ashram became the epicenter of India's independence movement</p>
+            </div>
+            <div class="timeline-item">
+              <h5>2017 - UNESCO Recognition</h5>
+              <p>First Indian city to be declared a UNESCO World Heritage Site</p>
+            </div>
+            <div class="timeline-item">
+              <h5>Present - Smart City</h5>
+              <p>Leading India's smart city transformation with digital infrastructure</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="image-gallery">
+            <div class="gallery-item" style="background: linear-gradient(45deg, #ff6b35, #f7931e);">
+              <div class="gallery-overlay">
+                <h5>Sabarmati Ashram</h5>
+                <p>Gandhi's residence and the birthplace of Satyagraha</p>
+              </div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #004e89, #1a73e8);">
+              <div class="gallery-overlay">
+                <h5>Adalaj Stepwell</h5>
+                <p>Architectural marvel from the 15th century</p>
+              </div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #667eea, #764ba2);">
+              <div class="gallery-overlay">
+                <h5>Akshardham Temple</h5>
+                <p>Modern spiritual and cultural complex</p>
+              </div>
+            </div>
+            <div class="gallery-item" style="background: linear-gradient(45deg, #f093fb, #f5576c);">
+              <div class="gallery-overlay">
+                <h5>Ahmedabad One Mall</h5>
+                <p>Modern shopping and entertainment hub</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Attractions -->
+  <section id="attractions" class="py-5">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5" data-aos="fade-up">Must-Visit Attractions</h2>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card card-hover h-100" onclick="openDetailModal('sabarmati')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-om fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Sabarmati Ashram</h4>
+              <p class="card-text">Historic residence of Mahatma Gandhi, now a museum showcasing the freedom struggle. The ashram attracts over 1 million visitors annually.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Historical</span>
+                <span class="badge bg-success">Museum</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-hover h-100" onclick="openDetailModal('akshardham')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-gopuram fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Akshardham Temple</h4>
+              <p class="card-text">A magnificent temple complex showcasing Indian culture, spirituality, and architecture. Features exhibitions, garden, and water shows.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Spiritual</span>
+                <span class="badge bg-warning">Modern</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card card-hover h-100" onclick="openDetailModal('adalaj')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-water fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Adalaj Stepwell</h4>
+              <p class="card-text">An architectural marvel from 1499, this five-story stepwell features intricate carvings and served as a resting place for travelers.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Architecture</span>
+                <span class="badge bg-info">15th Century</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="card card-hover h-100" onclick="openDetailModal('jama-masjid')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-mosque fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Jama Masjid</h4>
+              <p class="card-text">Built in 1424, this grand mosque is one of the most splendid mosques in India, known for its Indo-Islamic architecture.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Religious</span>
+                <span class="badge bg-secondary">Indo-Islamic</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+          <div class="card card-hover h-100" onclick="openDetailModal('kite-museum')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-kite fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Kite Museum</h4>
+              <p class="card-text">World's largest collection of kites, showcasing the art and culture of kite flying. Perfect representation of Gujarat's kite festival tradition.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Cultural</span>
+                <span class="badge bg-danger">Unique</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+          <div class="card card-hover h-100" onclick="openDetailModal('riverfront')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-water fa-3x icon-gradient mb-3"></i>
+              <h4 class="card-title">Sabarmati Riverfront</h4>
+              <p class="card-text">11-km long waterfront development project featuring gardens, promenades, and recreational facilities along the Sabarmati River.</p>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">Recreation</span>
+                <span class="badge bg-success">Modern</span>
+              </div>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Culture & Food Section -->
+  <section id="culture" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5" data-aos="fade-up">Culture & Cuisine</h2>
+      <div class="row">
+        <div class="col-lg-6" data-aos="fade-right">
+          <h3 class="h2 mb-4">Rich Cultural Heritage</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-music fa-2x text-primary me-3"></i>
+                <div>
+                  <h5>Folk Music & Dance</h5>
+                  <p class="mb-0">Garba, Dandiya, and traditional folk music</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-palette fa-2x text-success me-3"></i>
+                <div>
+                  <h5>Arts & Crafts</h5>
+                  <p class="mb-0">Bandhani, Patola silk, and handicrafts</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-calendar-alt fa-2x text-warning me-3"></i>
+                <div>
+                  <h5>Festivals</h5>
+                  <p class="mb-0">Navratri, International Kite Festival</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fas fa-book fa-2x text-info me-3"></i>
+                <div>
+                  <h5>Literature</h5>
+                  <p class="mb-0">Rich Gujarati literature tradition</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6" data-aos="fade-left">
+          <h3 class="h2 mb-4">Famous Gujarati Cuisine</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <i class="fas fa-utensils fa-2x text-primary mb-2"></i>
+                  <h6>Gujarati Thali</h6>
+                  <small>Complete vegetarian meal with variety of dishes</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <i class="fas fa-cookie-bite fa-2x text-success mb-2"></i>
+                  <h6>Dhokla & Khandvi</h6>
+                  <small>Iconic steamed snacks made from gram flour</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <i class="fas fa-ice-cream fa-2x text-warning mb-2"></i>
+                  <h6>Kulfi & Falooda</h6>
+                  <small>Traditional desserts and cooling drinks</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card border-0 shadow-sm">
+                <div class="card-body text-center">
+                  <i class="fas fa-pepper-hot fa-2x text-danger mb-2"></i>
+                  <h6>Street Food</h6>
+                  <small>Khaman, Jalebi, and various chaats</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Business & Industry -->
+  <section id="business" class="py-5">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5" data-aos="fade-up">Business Hub of Gujarat</h2>
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="p-4">
+            <i class="fas fa-industry fa-4x text-primary mb-3"></i>
+            <h4>Textile Capital</h4>
+            <p>Known as the "Manchester of India" with over 2,500 textile units</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="p-4">
+            <i class="fas fa-flask fa-4x text-success mb-3"></i>
+            <h4>Chemical Hub</h4>
+            <p>Major chemical and pharmaceutical manufacturing center</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="p-4">
+            <i class="fas fa-laptop-code fa-4x text-info mb-3"></i>
+            <h4>IT Sector</h4>
+            <p>Growing IT and ITES industry with numerous tech parks</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center" data-aos="fade-up" data-aos-delay="400">
+          <div class="p-4">
+            <i class="fas fa-graduation-cap fa-4x text-warning mb-3"></i>
+            <h4>Education Hub</h4>
+            <p>Home to IIM Ahmedabad and other prestigious institutions</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transportation -->
+  <section id="transport" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5" data-aos="fade-up">Smart Transportation</h2>
+      <div class="row g-4">
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="card card-hover h-100 border-0 shadow" onclick="openDetailModal('metro')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-subway fa-3x text-primary mb-3"></i>
+              <h4>Ahmedabad Metro</h4>
+              <p>Modern metro rail system connecting major areas of the city with 38 stations across two lines.</p>
+              <ul class="list-unstyled mt-3">
+                <li><i class="fas fa-check text-success me-2"></i>North-South Corridor</li>
+                <li><i class="fas fa-check text-success me-2"></i>East-West Corridor</li>
+                <li><i class="fas fa-check text-success me-2"></i>40+ km network</li>
+              </ul>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="card card-hover h-100 border-0 shadow" onclick="openDetailModal('brts')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-bus fa-3x text-success mb-3"></i>
+              <h4>BRTS System</h4>
+              <p>India's first Bus Rapid Transit System with dedicated lanes covering 85+ km across the city.</p>
+              <ul class="list-unstyled mt-3">
+                <li><i class="fas fa-check text-success me-2"></i>180+ bus stations</li>
+                <li><i class="fas fa-check text-success me-2"></i>Dedicated bus lanes</li>
+                <li><i class="fas fa-check text-success me-2"></i>Environment friendly</li>
+              </ul>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="card card-hover h-100 border-0 shadow" onclick="openDetailModal('airport')">
+            <div class="card-body text-center p-4">
+              <i class="fas fa-plane fa-3x text-info mb-3"></i>
+              <h4>Sardar Vallabhbhai Patel Airport</h4>
+              <p>International airport serving the city with connections to major domestic and international destinations.</p>
+              <ul class="list-unstyled mt-3">
+                <li><i class="fas fa-check text-success me-2"></i>International flights</li>
+                <li><i class="fas fa-check text-success me-2"></i>Modern facilities</li>
+                <li><i class="fas fa-check text-success me-2"></i>9th busiest in India</li>
+              </ul>
+              <div class="mt-3">
+                <button class="btn btn-outline-primary btn-sm">
+                  <i class="fas fa-info-circle me-2"></i>View Details
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Map -->
+  <section class="py-5" data-aos="fade-up">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Explore Ahmedabad</h2>
+      <div class="interactive-map">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.398116992019!2d72.5713627753928!3d23.073819479135668!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84f867c3cbbf%3A0x535fa6e4699c2b7c!2sAhmedabad%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1689481569826!5m2!1sen!2sin" 
+          width="100%" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+          <h2 class="display-5 fw-bold mb-4">Connect with Ahmedabad</h2>
+          <p class="lead mb-5">Stay updated with the latest news, events, and developments in our smart city</p>
+          
+          <div class="row g-4 mb-5">
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-phone fa-2x mb-3"></i>
+                <h5>Emergency Services</h5>
+                <p>Police: 100 | Fire: 101 | Ambulance: 108</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-envelope fa-2x mb-3"></i>
+                <h5>City Administration</h5>
+                <p>ahmedabad@smartcity.gov.in</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-map-marker-alt fa-2x mb-3"></i>
+                <h5>Tourist Information</h5>
+                <p>Gujarat Tourism Office, Ahmedabad</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mx-auto">
+              <form class="bg-light p-4 rounded text-dark">
+                <h5 class="mb-3">Subscribe to City Updates</h5>
+                <div class="mb-3">
+                  <input type="email" class="form-control" placeholder="Your Email Address" required>
+                </div>
+                <div class="mb-3">
+                  <select class="form-select">
+                    <option>Select Interest</option>
+                    <option>Tourism Updates</option>
+                    <option>Transport News</option>
+                    <option>Cultural Events</option>
+                    <option>Business Opportunities</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  <i class="fas fa-bell me-2"></i>Subscribe Now
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-secondary text-white py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h5>SmartCityConnect - Ahmedabad</h5>
+          <p class="mb-2">Your digital gateway to the Manchester of India</p>
+          <div class="social-links">
+            <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+            <a href="#" class="text-white me-3"><i class="fab fa-youtube fa-lg"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <h6>Quick Links</h6>
+          <ul class="list-unstyled">
+            <li><a href="#about" class="text-white-50">About Ahmedabad</a></li>
+            <li><a href="#attractions" class="text-white-50">Top Attractions</a></li>
+            <li><a href="#transport" class="text-white-50">Transportation</a></li>
+            <li><a href="#business" class="text-white-50">Business Hub</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3">
+          <h6>City Services</h6>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white-50">Smart City Portal</a></li>
+            <li><a href="#" class="text-white-50">Online Services</a></li>
+            <li><a href="#" class="text-white-50">Property Tax</a></li>
+            <li><a href="#" class="text-white-50">Complaint Portal</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="my-4">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 SmartCityConnect - Ahmedabad. Developed with ❤️ for the City of Heritage.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Detail Modal -->
+  <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-gradient text-white">
+          <h5 class="modal-title" id="detailModalLabel">
+            <i id="modalIcon" class="fas fa-info-circle me-2"></i>
+            <span id="modalTitle">Details</span>
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div id="modalContent">
+            <!-- Dynamic content will be loaded here -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="visitBtn">
+            <i class="fas fa-map-marker-alt me-2"></i>Get Directions
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Action Button -->
+  <a href="#home" class="floating-btn">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+  <script>
+    // Detail Modal System Data
+    const detailsData = {
+      'sabarmati': {
+        title: 'Sabarmati Ashram',
+        icon: 'fas fa-om',
+        description: 'The historic residence of Mahatma Gandhi, also known as Gandhi Ashram or Satyagraha Ashram, is one of the most visited places in Ahmedabad.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23dee2e6"/><text x="400" y="200" text-anchor="middle" fill="%236c757d" font-size="40" font-family="Arial">Sabarmati Ashram</text></svg>');">
+          </div>
+          
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-history text-primary me-2"></i>Historical Significance</h5>
+              <p>From 1917 to 1930, this ashram was the residence of Mahatma Gandhi and served as the epicenter of India's independence movement. It was from here that Gandhi launched the famous Dandi March (Salt March) in 1930.</p>
+              
+              <h5><i class="fas fa-museum text-success me-2"></i>Museum Highlights</h5>
+              <ul>
+                <li><strong>Gandhi Memorial Museum:</strong> Personal belongings, photographs, and documents</li>
+                <li><strong>Hriday Kunj:</strong> Gandhi's living quarters preserved as they were</li>
+                <li><strong>Vinoba Kutir:</strong> Vinoba Bhave's residence</li>
+                <li><strong>Upasana Mandir:</strong> Prayer hall for daily gatherings</li>
+                <li><strong>Library:</strong> Extensive collection of books on Gandhi's philosophy</li>
+              </ul>
+
+              <h5><i class="fas fa-leaf text-warning me-2"></i>Philosophy & Activities</h5>
+              <p>The ashram was founded on principles of Truth (Satya) and Non-violence (Ahimsa). Activities included:</p>
+              <ul>
+                <li>Spinning cotton (Charkha) for self-reliance</li>
+                <li>Education and literacy programs</li>
+                <li>Agricultural experiments</li>
+                <li>Community prayers and meditation</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <h6>Annual Visitors</h6>
+                  <p>1M+</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Established</h6>
+                  <p>1917</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>8:30 AM - 6:30 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h6>Entry Fee</h6>
+                  <p>Free</p>
+                </div>
+              </div>
+              
+              <h6><i class="fas fa-star rating-stars me-2"></i>Visitor Ratings</h6>
+              <div class="rating-stars mb-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span class="ms-2">4.7/5</span>
+              </div>
+              
+              <h6><i class="fas fa-info-circle text-info me-2"></i>Quick Tips</h6>
+              <ul class="small">
+                <li>Photography allowed in most areas</li>
+                <li>Guided tours available</li>
+                <li>Best visited in morning or evening</li>
+                <li>Comfortable walking shoes recommended</li>
+              </ul>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Sabarmati+Ashram+Ahmedabad'
+      },
+      
+      'akshardham': {
+        title: 'Akshardham Temple',
+        icon: 'fas fa-gopuram',
+        description: 'A magnificent temple complex showcasing 10,000 years of Indian culture, spirituality, and architecture.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23ffeaa7"/><text x="400" y="200" text-anchor="middle" fill="%23fdcb6e" font-size="35" font-family="Arial">Akshardham Temple</text></svg>');">
+          </div>
+          
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-temple text-primary me-2"></i>Temple Complex</h5>
+              <p>Swaminarayan Akshardham in Gandhinagar is a spiritual-cultural campus that displays millennia of traditional Indian and Hindu culture, spirituality, and architecture.</p>
+              
+              <h5><i class="fas fa-eye text-success me-2"></i>Main Attractions</h5>
+              <ul>
+                <li><strong>Akshardham Monument:</strong> 6,000 tons of pink sandstone central monument</li>
+                <li><strong>Sahajanand Darshan:</strong> Hall of Values with 15 3D dioramas</li>
+                <li><strong>Neelkanth Darshan:</strong> Giant screen film about young Swaminarayan</li>
+                <li><strong>Sanskruti Darshan:</strong> Cultural boat ride through 10,000 years of heritage</li>
+                <li><strong>Garden of India:</strong> Landscaped gardens representing Indian traditions</li>
+              </ul>
+
+              <h5><i class="fas fa-music text-warning me-2"></i>Shows & Exhibitions</h5>
+              <ul>
+                <li><strong>Water Show:</strong> Musical fountain with lights and sound (evening)</li>
+                <li><strong>Light & Sound Show:</strong> Projections on the main monument</li>
+                <li><strong>Hall of Values:</strong> Life-size animatronic shows</li>
+                <li><strong>Cultural Programs:</strong> Traditional music and dance performances</li>
+              </ul>
+
+              <h5><i class="fas fa-utensils text-info me-2"></i>Facilities</h5>
+              <ul>
+                <li>Premvati Food Court - Pure vegetarian cuisine</li>
+                <li>Gift shop with spiritual artifacts</li>
+                <li>Wheelchair accessibility</li>
+                <li>Audio guide in multiple languages</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Opened</h6>
+                  <p>2005</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>9:30 AM - 6:30 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h6>Entry Fee</h6>
+                  <p>₹30 (Adult)</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-car"></i>
+                  <h6>Distance</h6>
+                  <p>23 km from city</p>
+                </div>
+              </div>
+              
+              <h6><i class="fas fa-star rating-stars me-2"></i>Visitor Ratings</h6>
+              <div class="rating-stars mb-2">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span class="ms-2">4.9/5</span>
+              </div>
+              
+              <h6><i class="fas fa-info-circle text-info me-2"></i>Visitor Guidelines</h6>
+              <ul class="small">
+                <li>Mobile phones and cameras not allowed inside</li>
+                <li>Dress modestly (shoulders and knees covered)</li>
+                <li>Water show requires separate ticket</li>
+                <li>Allow 3-4 hours for complete experience</li>
+              </ul>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Akshardham+Temple+Gandhinagar'
+      },
+      'adalaj': {
+        title: 'Adalaj Stepwell',
+        icon: 'fas fa-water',
+        description: 'An architectural marvel from the 15th century featuring intricate carvings and unique cooling system.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%2300cec9"/><text x="400" y="200" text-anchor="middle" fill="%2300a8a7" font-size="35" font-family="Arial">Adalaj Stepwell</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-history text-primary me-2"></i>Historical Background</h5>
+              <p>Built in 1499 by Queen Rudabai, wife of the Vaghela chief, Veersinh. This five-story stepwell served as a resting place for travelers and pilgrims.</p>
+              
+              <h5><i class="fas fa-archway text-success me-2"></i>Architectural Features</h5>
+              <ul>
+                <li>Mix of Hindu and Islamic architectural styles</li>
+                <li>Intricate carvings of flowers, fish, and geometric patterns</li>
+                <li>Three entrance stairs meeting at the first underground level</li>
+                <li>Natural cooling system that keeps water 5-6°C cooler than outside</li>
+                <li>Octagonal shaped well at the bottom</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Built In</h6>
+                  <p>1499 AD</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>6:00 AM - 6:00 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h6>Entry Fee</h6>
+                  <p>₹25 (Adult)</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-car"></i>
+                  <h6>Distance</h6>
+                  <p>18 km from city</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Adalaj+Stepwell'
+      },
+      'jama-masjid': {
+        title: 'Jama Masjid',
+        icon: 'fas fa-mosque',
+        description: 'One of the most splendid mosques in India, known for its Indo-Islamic architecture.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23747d8c"/><text x="400" y="200" text-anchor="middle" fill="%235a6270" font-size="35" font-family="Arial">Jama Masjid</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-history text-primary me-2"></i>Historical Significance</h5>
+              <p>Built in 1424 during the reign of Ahmed Shah I, the founder of Ahmedabad. It served as the principal mosque for the royal family.</p>
+              
+              <h5><i class="fas fa-archway text-success me-2"></i>Architectural Highlights</h5>
+              <ul>
+                <li>Yellow sandstone structure with intricate carvings</li>
+                <li>260 columns supporting 15 domes</li>
+                <li>Blend of Hindu and Islamic architectural styles</li>
+                <li>Large central courtyard measuring 75m x 66m</li>
+                <li>Prayer hall with exquisite mihrabs and minarets</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Built In</h6>
+                  <p>1424 AD</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>6:00 AM - 8:00 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h6>Entry Fee</h6>
+                  <p>Free</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <h6>Capacity</h6>
+                  <p>10,000 worshippers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Jama+Masjid+Ahmedabad'
+      },
+      'kite-museum': {
+        title: 'Kite Museum',
+        icon: 'fas fa-kite',
+        description: "World's only museum dedicated to kites, showcasing the art and culture of kite flying.",
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23fbc531"/><text x="400" y="200" text-anchor="middle" fill="%23e1b12c" font-size="35" font-family="Arial">Kite Museum</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-history text-primary me-2"></i>About the Museum</h5>
+              <p>Established in 1985 by Bhanubhai Shah, this unique museum houses over 125 varieties of kites from India and around the world.</p>
+              
+              <h5><i class="fas fa-star text-success me-2"></i>Collection Highlights</h5>
+              <ul>
+                <li>Smallest kite in the world (1 inch x 1 inch)</li>
+                <li>Japanese kites with intricate paintings</li>
+                <li>Kites made of paper, plastic, nylon and cloth</li>
+                <li>Kites used for scientific experiments</li>
+                <li>Collection of kite-fighting threads (manja)</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Established</h6>
+                  <p>1985</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>10:00 AM - 6:00 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-rupee-sign"></i>
+                  <h6>Entry Fee</h6>
+                  <p>₹10 (Adult)</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <h6>Location</h6>
+                  <p>Sanskar Kendra, Paldi</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Kite+Museum+Ahmedabad'
+      },
+      'riverfront': {
+        title: 'Sabarmati Riverfront',
+        icon: 'fas fa-water',
+        description: 'Revitalized waterfront with promenades, parks and recreational facilities along the Sabarmati River.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%2300a8ff"/><text x="400" y="200" text-anchor="middle" fill="%230087cc" font-size="35" font-family="Arial">Sabarmati Riverfront</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-project-diagram text-primary me-2"></i>Project Overview</h5>
+              <p>11.25 km long riverfront development project that has transformed the banks of Sabarmati River into vibrant public spaces.</p>
+              
+              <h5><i class="fas fa-tree text-success me-2"></i>Features & Amenities</h5>
+              <ul>
+                <li>Two-level promenades along both banks</li>
+                <li>11 ghats for cultural activities</li>
+                <li>Boat rides and water sports facilities</li>
+                <li>Cycle tracks and jogging paths</li>
+                <li>Amphitheaters and event spaces</li>
+                <li>Riverfront flower park and gardens</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-ruler-combined"></i>
+                  <h6>Length</h6>
+                  <p>11.25 km</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Opened</h6>
+                  <p>2012</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-ticket-alt"></i>
+                  <h6>Entry Fee</h6>
+                  <p>Free</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-lightbulb"></i>
+                  <h6>Best Time</h6>
+                  <p>Evening</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Sabarmati+Riverfront'
+      },
+      'metro': {
+        title: 'Ahmedabad Metro',
+        icon: 'fas fa-subway',
+        description: 'Modern metro system connecting major areas of Ahmedabad.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23ff4757"/><text x="400" y="200" text-anchor="middle" fill="%23ff6b81" font-size="35" font-family="Arial">Ahmedabad Metro</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-train text-primary me-2"></i>Network Overview</h5>
+              <p>The metro system currently has two operational lines covering major parts of Ahmedabad with plans for expansion.</p>
+              
+              <h5><i class="fas fa-route text-success me-2"></i>Lines & Stations</h5>
+              <ul>
+                <li><strong>North-South Corridor:</strong> 20.7 km with 16 stations</li>
+                <li><strong>East-West Corridor:</strong> 18.5 km with 15 stations</li>
+                <li><strong>Total Stations:</strong> 31 stations</li>
+                <li><strong>Interchange Station:</strong> Old High Court</li>
+              </ul>
+              
+              <h5><i class="fas fa-wallet text-info me-2"></i>Fare & Payment</h5>
+              <ul>
+                <li>Minimum fare: ₹5</li>
+                <li>Maximum fare: ₹25</li>
+                <li>Smart cards and mobile QR tickets available</li>
+                <li>Daily and weekly passes offered</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Started</h6>
+                  <p>2019</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-clock"></i>
+                  <h6>Timings</h6>
+                  <p>6:30 AM - 10:00 PM</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-tachometer-alt"></i>
+                  <h6>Speed</h6>
+                  <p>80 km/h</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <h6>Daily Ridership</h6>
+                  <p>150,000+</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Ahmedabad+Metro'
+      },
+      'brts': {
+        title: 'BRTS System',
+        icon: 'fas fa-bus',
+        description: "India's first Bus Rapid Transit System with dedicated lanes.",
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23ff9ff3"/><text x="400" y="200" text-anchor="middle" fill="%23f368e0" font-size="35" font-family="Arial">BRTS System</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-bus-alt text-primary me-2"></i>System Overview</h5>
+              <p>Janmarg BRTS is Ahmedabad's bus rapid transit system, known for its efficiency and modern infrastructure.</p>
+              
+              <h5><i class="fas fa-road text-success me-2"></i>Network Details</h5>
+              <ul>
+                <li>Total length: 89 km</li>
+                <li>Dedicated bus lanes with median stations</li>
+                <li>89 operational stations</li>
+                <li>Average speed: 26 km/h</li>
+                <li>Peak frequency: 3-5 minutes</li>
+              </ul>
+              
+              <h5><i class="fas fa-ticket-alt text-info me-2"></i>Fare System</h5>
+              <ul>
+                <li>Minimum fare: ₹5</li>
+                <li>Maximum fare: ₹25</li>
+                <li>Smart cards with automatic fare calculation</li>
+                <li>Daily and monthly passes available</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-calendar"></i>
+                  <h6>Launched</h6>
+                  <p>2009</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-bus"></i>
+                  <h6>Fleet Size</h6>
+                  <p>250+ buses</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <h6>Daily Ridership</h6>
+                  <p>135,000+</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-trophy"></i>
+                  <h6>Awards</h6>
+                  <p>National Award for Excellence</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/BRTS+Ahmedabad'
+      },
+      'airport': {
+        title: 'Sardar Vallabhbhai Patel Airport',
+        icon: 'fas fa-plane',
+        description: 'International airport serving Ahmedabad with domestic and international connections.',
+        fullDetails: `
+          <div class="image-slider" style="background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" fill="%23e9ecef"><rect width="800" height="400" fill="%23dfe6e9"/><text x="400" y="200" text-anchor="middle" fill="%23b2bec3" font-size="35" font-family="Arial">SVPI Airport</text></svg>');">
+          </div>
+          <div class="row">
+            <div class="col-md-8">
+              <h5><i class="fas fa-plane-departure text-primary me-2"></i>Airport Overview</h5>
+              <p>Sardar Vallabhbhai Patel International Airport is the eighth busiest airport in India, handling both domestic and international flights.</p>
+              
+              <h5><i class="fas fa-terminal text-success me-2"></i>Terminals</h5>
+              <ul>
+                <li><strong>Terminal 1:</strong> Domestic flights</li>
+                <li><strong>Terminal 2:</strong> International flights</li>
+                <li>Total area: 52,500 square meters</li>
+                <li>Annual capacity: 12 million passengers</li>
+              </ul>
+              
+              <h5><i class="fas fa-route text-info me-2"></i>Connectivity</h5>
+              <ul>
+                <li>Direct flights to 28 domestic destinations</li>
+                <li>International flights to 15 destinations</li>
+                <li>Major airlines: Air India, IndiGo, SpiceJet, Emirates, Qatar Airways</li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <div class="detail-grid">
+                <div class="detail-item">
+                  <i class="fas fa-plane"></i>
+                  <h6>IATA Code</h6>
+                  <p>AMD</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-users"></i>
+                  <h6>Passengers (2023)</h6>
+                  <p>11.2 million</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-road"></i>
+                  <h6>Distance</h6>
+                  <p>9 km from city</p>
+                </div>
+                <div class="detail-item">
+                  <i class="fas fa-trophy"></i>
+                  <h6>Awards</h6>
+                  <p>Best Airport in India (2019)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
+        location: 'https://www.google.com/maps/search/Sardar+Vallabhbhai+Patel+Airport'
+      }
+    };
+
+    // Function to open detail modal
+    function openDetailModal(attractionId) {
+      const data = detailsData[attractionId];
+      if (!data) return;
+      
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalIcon').className = data.icon + ' me-2';
+      document.getElementById('modalContent').innerHTML = data.fullDetails;
+      
+      document.getElementById('visitBtn').onclick = function() {
+        window.open(data.location, '_blank');
+      };
+      
+      const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+      modal.show();
+    }
+
+    // Wait for all scripts to load before initializing
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if AOS is loaded
+      if (typeof AOS !== 'undefined') {
+        AOS.init({
+          duration: 1000,
+          once: true,
+          offset: 100
+        });
+      } else {
+        console.warn('AOS library not loaded, animations will be disabled');
+        // Remove AOS attributes if library fails to load
+        document.querySelectorAll('[data-aos]').forEach(el => {
+          el.removeAttribute('data-aos');
+          el.removeAttribute('data-aos-delay');
+        });
+      }
+
+      // Enhanced Weather Widget
+      const weatherWidget = document.getElementById("weatherWidget");
+
+      if (weatherWidget) {
+        fetch("https://api.open-meteo.com/v1/forecast?latitude=23.03&longitude=72.58&current_weather=true&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=Asia%2FKolkata")
+          .then((res) => res.json())
+          .then((data) => {
+            const current = data.current_weather;
+            const daily = data.daily;
+            
+            const getWeatherIcon = (code) => {
+              if (code <= 3) return 'fas fa-sun';
+              if (code <= 48) return 'fas fa-cloud';
+              if (code <= 67) return 'fas fa-cloud-rain';
+              if (code <= 77) return 'fas fa-snowflake';
+              return 'fas fa-bolt';
+            };
+
+            const getWeatherDescription = (code) => {
+              if (code <= 3) return 'Clear/Sunny';
+              if (code <= 48) return 'Cloudy';
+              if (code <= 67) return 'Rainy';
+              if (code <= 77) return 'Snowy';
+              return 'Thunderstorm';
+            };
+
+            const weatherHTML = `
+              <div class="text-center">
+                <i class="${getWeatherIcon(current.weathercode)} fa-3x mb-3"></i>
+                <h3 class="display-6 fw-bold">${Math.round(current.temperature)}°C</h3>
+                <p class="fs-5 mb-2">${getWeatherDescription(current.weathercode)}</p>
+                <div class="row text-center mt-3">
+                  <div class="col-6">
+                    <i class="fas fa-wind me-2"></i>
+                    <small>${current.windspeed} km/h</small>
+                  </div>
+                  <div class="col-6">
+                    <i class="fas fa-eye me-2"></i>
+                    <small>Good Visibility</small>
+                  </div>
+                </div>
+                <div class="row text-center mt-2">
+                  <div class="col-6">
+                    <small>High: ${Math.round(daily.temperature_2m_max[0])}°</small>
+                  </div>
+                  <div class="col-6">
+                    <small>Low: ${Math.round(daily.temperature_2m_min[0])}°</small>
+                  </div>
+                </div>
+                <hr class="my-3">
+                <p class="small mb-0">
+                  <i class="fas fa-clock me-2"></i>
+                  Last updated: ${new Date().toLocaleTimeString('en-IN', {timeZone: 'Asia/Kolkata'})}
+                </p>
+              </div>
+            `;
+            weatherWidget.innerHTML = weatherHTML;
+          })
+          .catch(() => {
+            weatherWidget.innerHTML = `
+              <div class="text-center">
+                <i class="fas fa-exclamation-triangle fa-3x mb-3"></i>
+                <h5>Weather Unavailable</h5>
+                <p>Unable to fetch current weather data</p>
+                <small>Please check your internet connection</small>
+              </div>
+            `;
+          });
+      }
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Active navigation highlighting
+      window.addEventListener('scroll', () => {
+        let current = '';
+        const sections = document.querySelectorAll('section[id]');
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= (sectionTop - 200)) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+
+      // Newsletter subscription
+      const form = document.querySelector('form');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const email = this.querySelector('input[type="email"]').value;
+          const interest = this.querySelector('select').value;
+          
+          if (email && interest !== 'Select Interest') {
+            // Simulate successful subscription
+            this.innerHTML = `
+              <div class="text-center text-success">
+                <i class="fas fa-check-circle fa-3x mb-3"></i>
+                <h5>Successfully Subscribed!</h5>
+                <p>Thank you for subscribing to ${interest}. You'll receive updates soon.</p>
+              </div>
+            `;
+          } else {
+            alert('Please fill in all fields');
+          }
+        });
+      }
+
+      // Dynamic facts rotation
+      const facts = [
+        "Ahmedabad is home to the Indian Institute of Management (IIM), established in 1961.",
+        "The city produces about 30% of India's denim fabric and is a major textile exporter.",
+        "Ahmedabad Metro is the 12th operational metro system in India.",
+        "The city has over 600 gardens and parks, making it one of the greenest cities in India.",
+        "Ahmedabad's stock exchange is the second oldest in India, established in 1894.",
+        "The city celebrates the International Kite Festival every January 14th.",
+        "Ahmedabad has India's first intercity double-decker bus service to Mumbai."
+      ];
+
+      let factIndex = 0;
+      const rotateFacts = () => {
+        const factElements = document.querySelectorAll('.col-md-6 .p-3');
+        if (factElements.length >= 2) {
+          factElements[0].innerHTML = `<strong>✨ Fact:</strong> ${facts[factIndex]}`;
+          factElements[1].innerHTML = `<strong>✨ Fact:</strong> ${facts[(factIndex + 1) % facts.length]}`;
+          factIndex = (factIndex + 2) % facts.length;
+        }
+      };
+
+      // Rotate facts every 5 seconds
+      setInterval(rotateFacts, 5000);
+
+      // Gallery item hover effects
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.05) rotateZ(2deg)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1) rotateZ(0deg)';
+        });
+      });
+
+      // Counter animation for stats
+      const animateCounters = () => {
+        const counters = document.querySelectorAll('.display-4');
+        const speed = 200;
+
+        counters.forEach(counter => {
+          const updateCount = () => {
+            const target = counter.innerText;
+            const count = +counter.getAttribute('data-count') || 0;
+            
+            // Extract number from text
+            const targetNum = parseFloat(target.replace(/[^0-9.]/g, ''));
+            const inc = targetNum / speed;
+
+            if (count < targetNum) {
+              counter.setAttribute('data-count', count + inc);
+              if (target.includes('M+')) {
+                counter.innerHTML = (count + inc).toFixed(1) + 'M+';
+              } else if (target.includes('%')) {
+                counter.innerHTML = (count + inc).toFixed(1) + '%';
+              } else if (target.includes('+')) {
+                counter.innerHTML = Math.ceil(count + inc) + '+';
+              } else {
+                counter.innerHTML = '#' + Math.ceil(count + inc);
+              }
+              setTimeout(updateCount, 1);
+            } else {
+              counter.innerHTML = target;
+            }
+          };
+          updateCount();
+        });
+      };
+
+      // Trigger counter animation when stats section is visible
+      const statsSection = document.querySelector('.stats-section');
+      let animationTriggered = false;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !animationTriggered) {
+            animateCounters();
+            animationTriggered = true;
+          }
+        });
+      });
+
+      if (statsSection) {
+        observer.observe(statsSection);
+      }
+
+      // Add dynamic time display
+      const updateTime = () => {
+        const now = new Date();
+        const timeString = now.toLocaleString('en-IN', {
+          timeZone: 'Asia/Kolkata',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        // Add time display to footer if doesn't exist
+        const footer = document.querySelector('footer .container .text-center p');
+        if (footer && !footer.innerHTML.includes('IST')) {
+          footer.innerHTML += `<br><small class="text-muted">Current Time in Ahmedabad: ${timeString} IST</small>`;
+        }
+      };
+
+      updateTime();
+      setInterval(updateTime, 60000); // Update every minute
+
+      console.log('🏙️ SmartCityConnect - Ahmedabad loaded successfully!');
+      console.log('📍 Welcome to the Manchester of India & UNESCO World Heritage City');
+    });
+  </script>
+</body>
+</html>
